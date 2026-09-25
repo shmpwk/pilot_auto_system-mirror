@@ -49,3 +49,18 @@ tools/sync_config.py show autoware_universe  # the git-filter-repo call it impli
 ```
 
 Without `--push`, `tools/mirror.py mirror` is a dry run.
+
+### Manual sync
+
+Publishing is **fast-forward only** (never `--force`). Mirror tips such as
+`awf-latest` do not require a PR; force-push and branch deletion remain blocked.
+
+```bash
+python3 -m pip install pyyaml 'git-filter-repo==2.47.0'
+
+# All sources (and any combined targets)
+PUSH=1 ./tools/manual_sync.sh
+
+# awf-latest only
+SOURCES=autoware_universe PUSH=1 ./tools/manual_sync.sh
+```
